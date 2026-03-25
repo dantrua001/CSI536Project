@@ -106,6 +106,10 @@ def diaRR():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled  = scaler.transform(X_test)
 
+    shift_strength = 1.5
+    rng = np.random.default_rng(seed=0)
+    X_test_shifted = X_test_scaled + rng.normal(loc=shift_strength, scale=0.5, size=X_test_scaled.shape)
+
     # Find best alpha value
     alphas = np.logspace(-3, 4, 100)
     ridge_cv = RidgeCV(alphas=alphas, cv=5, scoring="neg_mean_squared_error")
@@ -117,39 +121,48 @@ def diaRR():
     model.fit(X_train_scaled, y_train)
 
     y_pred = model.predict(X_test_scaled)
-    rmse   = np.sqrt(mean_squared_error(y_test, y_pred))
-    r2     = r2_score(y_test, y_pred)
+    y_pred_shifted = model.predict(X_test_shifted)  # shifted
+    rmse_orig   = np.sqrt(mean_squared_error(y_test, y_pred))
+    rmse_new = np.sqrt(mean_squared_error(y_test, y_pred_shifted))
+    r2_orig     = r2_score(y_test, y_pred)
+    r2_new = r2_score(y_test, y_pred_shifted)
+
 
     fig, axes = plt.subplots(1, 3, figsize=(16, 5))
     fig.suptitle("Ridge Regression — Diabetes Dataset", fontsize=14, fontweight="bold")
 
     # (a) Actual vs Predicted
-    ax = axes[0]
-    ax.scatter(y_test, y_pred, alpha=0.6, edgecolors="k", linewidths=0.4)
-    lims = [min(y_test.min(), y_pred.min()) - 10,
-            max(y_test.max(), y_pred.max()) + 10]
-    ax.plot(lims, lims, "r--", lw=1.5, label="Perfect fit")
-    ax.set_xlabel("Actual"); ax.set_ylabel("Predicted")
-    ax.set_title(f"Actual vs Predicted\nR² = {r2:.3f}")
-    ax.legend()
+    for ax, preds, label, color in zip(
+        axes[:2],
+        [y_pred, y_pred_shifted],
+        [f"Original  R²={r2_orig:.3f}  RMSE={rmse_orig:.1f}",
+        f"Shifted   R²={r2_new:.3f}  RMSE={rmse_new:.1f}"],
+        ["steelblue", "tomato"]
+    ):
+        ax.scatter(y_test, preds, alpha=0.6, color=color, edgecolors="k", linewidths=0.4)
+        lims = [min(y_test.min(), preds.min()) - 10, max(y_test.max(), preds.max()) + 10]
+        ax.plot(lims, lims, "r--", lw=1.5)
+        ax.set_xlabel("Actual")
+        ax.set_ylabel("Predicted")
+        ax.set_title(label)
 
-    ax = axes[2]
-    rmses = []
-    for a in alphas:
-        m = Ridge(alpha=a).fit(X_train_scaled, y_train)
-        rmses.append(np.sqrt(mean_squared_error(y_test, m.predict(X_test_scaled))))
-    ax.semilogx(alphas, rmses, color="steelblue")
-    ax.axvline(best_alpha, color="red", linestyle="--", label=f"Best α={best_alpha:.3f}")
-    ax.set_xlabel("Alpha (log scale)"); ax.set_ylabel("Test RMSE")
-    ax.set_title("Regularisation Path"); ax.legend()
+    #ax = axes[2]
+    #rmses = []
+    #for a in alphas:
+        #m = Ridge(alpha=a).fit(X_train_scaled, y_train)
+        #rmses.append(np.sqrt(mean_squared_error(y_test, m.predict(X_test_scaled))))
+    #ax.semilogx(alphas, rmses, color="steelblue")
+    #ax.axvline(best_alpha, color="red", linestyle="--", label=f"Best α={best_alpha:.3f}")
+    #ax.set_xlabel("Alpha (log scale)"); ax.set_ylabel("Test RMSE")
+    #ax.set_title("Regularisation Path"); ax.legend()
 
     plt.show()
 
 
 
 def main():
-    SVMBreast()
-    #diaRR()
+    #SVMBreast()
+    diaRR()
 
 if __name__ == "__main__":
     main()
