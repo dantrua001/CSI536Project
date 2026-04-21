@@ -500,78 +500,8 @@ At 40% noise:
 ---
 
 
-## Team Workflow
 
-### Task Distribution
 
-**Person 1: Run & Validate**
-```bash
-# 1. Run the script
-python phase1_baseline.py
-
-# 2. Verify outputs
-ls -lh Results/
-
-# 3. Check console output for "PHASE 1 COMPLETE!"
-
-# 4. Quick validation:
-# - 4 files in Results/
-# - Both PNG files viewable
-# - Both CSV files open in Excel/text editor
-```
-
-**Person 2: Analyze Results**
-```python
-import pandas as pd
-
-# Load data
-svm = pd.read_csv('Results/svm_degradation_results.csv')
-ridge = pd.read_csv('Results/ridge_degradation_results.csv')
-
-# Find SVM cliff
-cliff_sigma = svm[svm['accuracy'] < 0.7]['shift_sigma'].min()
-print(f"SVM accuracy drops below 70% at σ = {cliff_sigma}")
-
-# Find Ridge MSE doubling point
-baseline_mse = ridge['mse'].iloc[0]
-double_idx = ridge[ridge['mse'] > 2*baseline_mse]['noise_ratio'].min()
-print(f"Ridge MSE doubles at {double_idx:.0%} noise")
-
-# Margin collapse analysis
-collapse_data = svm[svm['shift_sigma'] == 2.0]
-print(f"At σ=2.0: Precision={collapse_data['precision'].values[0]:.3f}, "
-      f"Recall={collapse_data['recall'].values[0]:.3f}")
-```
-
-**Person 3: Prepare Visuals**
-1. Open both PNG files
-2. Annotate key findings:
-   - Circle the performance cliff on SVM plot
-   - Mark the 40% peak on Ridge plot
-3. Create summary slides:
-   - Slide 1: SVM degradation curve with cliff highlighted
-   - Slide 2: Ridge MSE explosion with numerical annotations
-   - Slide 3: Side-by-side comparison table
-
----
-
-## Success Checklist
-
-After running `phase1_baseline.py`, verify:
-
-- [ ] Script ran without errors
-- [ ] Console shows "PHASE 1 COMPLETE!"
-- [ ] `Results/` folder exists
-- [ ] `svm_degradation.png` exists and displays 4 panels
-- [ ] `ridge_degradation.png` exists and displays 4 panels
-- [ ] `svm_degradation_results.csv` has 9 rows, 5 columns
-- [ ] `ridge_degradation_results.csv` has 9 rows, 5 columns
-- [ ] SVM plot shows clear degradation trend
-- [ ] Ridge plot shows MSE growth
-- [ ] CSV files open correctly in Excel/text editor
-- [ ] Baseline metrics match expected values (SVM ~98%, Ridge MSE ~2863)
-
----
 
 ## Next Steps
 
