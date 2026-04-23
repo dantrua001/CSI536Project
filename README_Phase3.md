@@ -48,7 +48,7 @@ At **40% label noise**, baseline Ridge regression MSE increases by **~68%** over
 **Expected performance:** Significant degradation at high noise levels (MSE increase ~68% at 40% noise)
 
 **Code concept:**
-```python
+```
 model = Ridge(alpha=1.0)
 model.fit(X_train, y_train)
 ```
@@ -80,7 +80,7 @@ model.fit(X_train, y_train)
 - May underfit if too much noise added
 
 **Code concept:**
-```python
+```
 # Augment training data
 X_aug = [X_train]
 y_aug = [y_train]
@@ -124,7 +124,7 @@ model.fit(X_combined, y_combined)
 - Slightly slower training
 
 **Code concept:**
-```python
+```
 from sklearn.linear_model import HuberRegressor
 
 model = HuberRegressor(epsilon=1.35, alpha=1.0)
@@ -170,7 +170,7 @@ This gives 95% efficiency vs ordinary least squares for Gaussian errors, while b
 - Doesn't directly address label noise at test time
 
 **Code concept:**
-```python
+```
 from sklearn.ensemble import BaggingRegressor
 
 base = Ridge(alpha=1.0)
