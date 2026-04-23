@@ -1,0 +1,8 @@
+Method,Training Time,Memory Usage,Scalability
+Baseline SVM/Ridge,1x (baseline),1x (baseline),Excellent
+Euclidean Weighting,1x,1x,Excellent
+RBF Kernel Weighting,1.2x,1.2x,Good
+Density Ratio,2x,1x,Good
+Noise Injection,3x,3x,Fair
+Huber Regression,1.5x,1x,Good
+Bagging,10x,10x,Fair

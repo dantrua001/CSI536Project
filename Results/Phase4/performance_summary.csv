@@ -1,0 +1,7 @@
+Metric,Phase 1 Baseline,Best Method,Method Name
+SVM Accuracy (σ=0),98.25%,98.25%,-
+SVM Accuracy (σ=1.5),64.04%,84.21%,RBF Kernel
+SVM Improvement,-,+20.2%,RBF Kernel
+Ridge MSE (0% noise),2892,2858,Huber
+Ridge MSE (40% noise),4859 (+68.0%),4799 (+66.0%),Huber
+Ridge Improvement,-,+2.0%,Huber

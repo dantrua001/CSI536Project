@@ -1,0 +1,9 @@
+Phase,Method,Model,Strategy,Complexity,Improvement,Best Use Case
+2,Baseline SVM,SVM,None,Low,0%,Baseline comparison
+2,Euclidean Weighting,SVM,Distance-based weights,Low,-0.9%,Simple interpretability
+2,RBF Kernel Weighting,SVM,Kernel similarity weights,Low,+20.2%,Gaussian covariate shift
+2,Density Ratio,SVM,Probabilistic weights,Medium,+2.6%,General covariate shift
+3,Baseline Ridge,Ridge,None,Low,0%,Baseline comparison
+3,Noise Injection,Ridge,Data augmentation,Medium,-0.6%,Training-time robustness
+3,Huber Regression,Ridge,Robust loss function,Low,+2.0%,Label noise/outliers
+3,Bagging,Ridge,Ensemble averaging,Medium,-1.9%,Variance reduction
