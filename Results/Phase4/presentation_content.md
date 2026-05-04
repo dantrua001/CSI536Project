@@ -116,4 +116,13 @@ How do linear models perform when training and test distributions differ?
 
 ---
 
+## Questions?
 
+**Group 2:**
+- Mehak Seth
+- Daniel Truax
+- Juhan Choi
+
+**Course:** CSI 536 - Robust Linear Models under Distribution Shift
+
+Thank you!
