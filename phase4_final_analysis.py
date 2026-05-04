@@ -208,7 +208,7 @@ def create_master_comparison():
 
     output_path = 'Results/Phase4/master_comparison.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"✅ Saved master comparison: {output_path}")
+    print(f"Saved master comparison: {output_path}")
     plt.close()
 
 
@@ -340,7 +340,7 @@ def create_summary_tables():
     performance_summary.to_csv('Results/Phase4/performance_summary.csv', index=False)
     computational_cost.to_csv('Results/Phase4/computational_cost.csv', index=False)
 
-    print("✅ Saved summary tables:")
+    print("Saved summary tables:")
     print("   - Results/Phase4/method_comparison.csv")
     print("   - Results/Phase4/performance_summary.csv")
     print("   - Results/Phase4/computational_cost.csv")
@@ -364,25 +364,25 @@ def main():
     Path('Results/Phase4').mkdir(parents=True, exist_ok=True)
 
     # Generate all materials
-    print("📊 Creating master comparison visualization...")
+    print("Creating master comparison visualization...")
     create_master_comparison()
 
-    print("\n📋 Generating summary tables...")
+    print("\nGenerating summary tables...")
     create_summary_tables()
 
     # Final summary
     print("\n" + "=" * 80)
-    print("✅ PHASE 4 COMPLETE!")
+    print("PHASE 4 COMPLETE!")
     print("=" * 80)
     print("\nGenerated materials:")
-    print("  📊 Visualizations:")
+    print("  Visualizations:")
     print("     - Results/Phase4/master_comparison.png")
-    print("\n  📋 Summary Tables:")
+    print("\n  Summary Tables:")
     print("     - Results/Phase4/method_comparison.csv")
     print("     - Results/Phase4/performance_summary.csv")
     print("     - Results/Phase4/computational_cost.csv")
     print("\n" + "=" * 80)
-    print("PROJECT COMPLETE! All 4 phases finished successfully! 🎉")
+    print("PROJECT COMPLETE! All 4 phases finished successfully!")
     print("=" * 80)
 
 

@@ -60,7 +60,7 @@ def setup_results_folder():
     """
     results_dir = Path("Results")
     results_dir.mkdir(exist_ok=True)
-    print(f"\n📁 Results folder ready: {results_dir.absolute()}")
+    print(f"\nResults folder ready: {results_dir.absolute()}")
     return results_dir
 
 
@@ -178,10 +178,10 @@ def svm_covariate_shift_experiment():
     cliff_idx = np.where(df_results['accuracy'] < cliff_threshold)[0]
     if len(cliff_idx) > 0:
         cliff_sigma = df_results['shift_sigma'].iloc[cliff_idx[0]]
-        print(f"\n⚠️  Performance Cliff Detected at σ = {cliff_sigma}")
+        print(f"\nPerformance Cliff Detected at σ = {cliff_sigma}")
         print(f"   Accuracy dropped below 70% of baseline ({cliff_threshold:.4f})")
     else:
-        print("\n✅ No severe performance cliff detected")
+        print("\nNo severe performance cliff detected")
 
     return df_results, svm, X_train, X_test, y_train, y_test, X_scaled, y
 
@@ -316,7 +316,7 @@ def ridge_label_noise_experiment():
     negative_r2_idx = np.where(df_results['r2_score'] < 0)[0]
     if len(negative_r2_idx) > 0:
         first_negative = df_results['noise_ratio'].iloc[negative_r2_idx[0]]
-        print(f"\n⚠️  R² became negative at {first_negative:.0%} noise")
+        print(f"\nR² became negative at {first_negative:.0%} noise")
         print(f"   (Model worse than predicting mean)")
 
     return df_results, model, X_train_scaled, X_test_scaled, y_train, y_test
@@ -380,7 +380,7 @@ def plot_svm_degradation(df_results, results_dir, save_filename='svm_degradation
     # Save to Results folder
     save_path = results_dir / save_filename
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"   ✅ Saved: {save_path}")
+    print(f"   Saved: {save_path}")
     plt.show()
 
 
@@ -463,7 +463,7 @@ def plot_ridge_degradation(df_results, results_dir, save_filename='ridge_degrada
     # Save to Results folder
     save_path = results_dir / save_filename
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"   ✅ Saved: {save_path}")
+    print(f"   Saved: {save_path}")
     plt.show()
 
 
@@ -501,7 +501,7 @@ def main():
     # Save SVM results to Results folder
     svm_csv_path = results_dir / 'svm_degradation_results.csv'
     svm_results.to_csv(svm_csv_path, index=False)
-    print(f"\n✅ SVM results saved to: {svm_csv_path}")
+    print(f"\nSVM results saved to: {svm_csv_path}")
 
     # ========== Experiment 2: Ridge ==========
     ridge_results, ridge_model, X_train_ridge, X_test_ridge, y_train_ridge, y_test_ridge = \
@@ -513,20 +513,20 @@ def main():
     # Save Ridge results to Results folder
     ridge_csv_path = results_dir / 'ridge_degradation_results.csv'
     ridge_results.to_csv(ridge_csv_path, index=False)
-    print(f"\n✅ Ridge results saved to: {ridge_csv_path}")
+    print(f"\nRidge results saved to: {ridge_csv_path}")
 
     # ========== Summary ==========
     print("\n" + "=" * 70)
     print("                    PHASE 1 COMPLETE!")
     print("=" * 70)
-    print(f"\n📊 All results saved to: {results_dir.absolute()}")
+    print(f"\nAll results saved to: {results_dir.absolute()}")
     print("\nGenerated Files:")
     print(f"   1. {results_dir}/svm_degradation.png - SVM performance curves")
     print(f"   2. {results_dir}/ridge_degradation.png - Ridge performance curves")
     print(f"   3. {results_dir}/svm_degradation_results.csv - SVM numerical results")
     print(f"   4. {results_dir}/ridge_degradation_results.csv - Ridge numerical results")
 
-    print("\n📈 Key Findings:")
+    print("\nKey Findings:")
     print(f"\n   SVM (Covariate Shift):")
     print(f"   - Baseline Accuracy: {svm_results['accuracy'].iloc[0]:.4f}")
     print(f"   - Worst Accuracy (σ={svm_results['shift_sigma'].iloc[-1]}): {svm_results['accuracy'].iloc[-1]:.4f}")

@@ -276,7 +276,7 @@ def run_experiment(X_train, X_test, y_train, y_test, noise_levels):
 
     # For each method
     for method in methods:
-        print(f"\n🔧 Method: {method.name}")
+        print(f"\nMethod: {method.name}")
         print("-" * 80)
 
         # Train the model ONCE on clean training data
@@ -388,7 +388,7 @@ def plot_method_comparison(results_df, save_path):
                  fontsize=18, fontweight='bold', y=0.995)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"✅ Saved method comparison plot: {save_path}")
+    print(f"Saved method comparison plot: {save_path}")
     plt.close()
 
 
@@ -439,7 +439,7 @@ def plot_robustness_curves(results_df, save_path):
 
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"✅ Saved robustness curves plot: {save_path}")
+    print(f"Saved robustness curves plot: {save_path}")
     plt.close()
 
 
@@ -451,7 +451,7 @@ def main():
     """Main execution function."""
 
     # Load and prepare data
-    print("\n📊 Loading Diabetes dataset...")
+    print("\nLoading Diabetes dataset...")
     X, y = load_diabetes(return_X_y=True)
 
     # Train/test split (80/20)
@@ -464,7 +464,7 @@ def main():
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    print(f"✅ Data loaded and preprocessed")
+    print(f"Data loaded and preprocessed")
     print(f"   Training samples: {len(X_train)}")
     print(f"   Test samples: {len(X_test)}")
     print(f"   Features: {X_train.shape[1]}")
@@ -487,7 +487,7 @@ def main():
 
     results_path = 'Results/Phase3/phase3_results.csv'
     results_df.to_csv(results_path, index=False)
-    print(f"✅ Saved results CSV: {results_path}")
+    print(f"Saved results CSV: {results_path}")
 
     # Generate plots
     plot_method_comparison(
@@ -545,12 +545,12 @@ def main():
     print(f"Improvement over baseline: {improvement:.1f}%")
 
     if best_increase < 80:
-        print(f"✅ GOAL ACHIEVED! ({best_increase:.1f}% < 80%)")
+        print(f"GOAL ACHIEVED! ({best_increase:.1f}% < 80%)")
     else:
-        print(f"⚠️  Goal not fully achieved, but showing {improvement:.1f}% improvement!")
+        print(f"Goal not fully achieved, but showing {improvement:.1f}% improvement!")
 
     print("\n" + "=" * 80)
-    print("✅ PHASE 3 COMPLETE!")
+    print("PHASE 3 COMPLETE!")
     print("=" * 80)
     print("\nGenerated files:")
     print("  - Results/Phase3/phase3_results.csv")

@@ -235,7 +235,7 @@ def run_experiment(X_train, X_test, y_train, y_test, noise_levels):
 
     # For each weighting method
     for method in methods:
-        print(f"\n🔧 Method: {method.name}")
+        print(f"\nMethod: {method.name}")
         print("-" * 80)
 
         # Store weights at σ=1.5 for visualization (the cliff point)
@@ -323,7 +323,7 @@ def plot_weight_distributions(all_weights, save_path):
                  fontsize=16, fontweight='bold', y=1.00)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"\n✅ Saved weight distributions plot: {save_path}")
+    print(f"\nSaved weight distributions plot: {save_path}")
     plt.close()
 
 
@@ -376,7 +376,7 @@ def plot_robustness_comparison(results_df, save_path):
                  fontsize=18, fontweight='bold', y=0.995)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"✅ Saved robustness comparison plot: {save_path}")
+    print(f"Saved robustness comparison plot: {save_path}")
     plt.close()
 
 
@@ -388,7 +388,7 @@ def main():
     """Main execution function."""
 
     # Load and prepare data
-    print("\n📊 Loading Breast Cancer dataset...")
+    print("\nLoading Breast Cancer dataset...")
     X, y = load_breast_cancer(return_X_y=True)
 
     # Train/test split (80/20)
@@ -401,7 +401,7 @@ def main():
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    print(f"✅ Data loaded and preprocessed")
+    print(f"Data loaded and preprocessed")
     print(f"   Training samples: {len(X_train)}")
     print(f"   Test samples: {len(X_test)}")
     print(f"   Features: {X_train.shape[1]}")
@@ -421,7 +421,7 @@ def main():
 
     results_path = 'Results/Phase2/phase2_results.csv'
     results_df.to_csv(results_path, index=False)
-    print(f"✅ Saved results CSV: {results_path}")
+    print(f"Saved results CSV: {results_path}")
 
     # Generate plots
     plot_weight_distributions(
@@ -451,7 +451,7 @@ def main():
         print(f"  {method:20s}: {method_acc:.4f} ({improvement:+.2f}% improvement)")
 
     print("\n" + "=" * 80)
-    print("✅ PHASE 2 COMPLETE!")
+    print("PHASE 2 COMPLETE!")
     print("=" * 80)
     print("\nGenerated files:")
     print("  - Results/Phase2/phase2_results.csv")
