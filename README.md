@@ -1,7 +1,7 @@
 # Robust Linear Models under Distribution Shift
 
 **CSI 536 - Machine Learning | Project Code: R**  
-**Team Members:** Mehak, Daniel Truax, Juhan Choi
+**Team Members:** Mehak Seth, Daniel Truax, Juhan Choi
 
 ---
 
